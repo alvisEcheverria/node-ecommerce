@@ -50,7 +50,7 @@ const bcrypt = require('bcrypt');
  *       properties:
  *         token:
  *           type: string
- *           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiQWx2aXMiLCJsYXN0TmFtZSI6IkVjaGV2ZXJyaWEiLCJlbWFpbCI6ImFsdmlzLmNtQGdtYWlsLmNvbSIsInBob25lIjoiMTIzNDU2NzgzMCIsImlhdCI6MTY2OTk5MzU3NSwiZXhwIjoxNjcwMDc5OTc1fQ.Xy7pTLR_B34908YSO4p6xZ-rdPZLJNkLgz4925aOD4Le-G5O28efp1vJSLLpMUJRkM2xFLuo2VwxrfSwAj7JPg
+ *           example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZmlyc3ROYW1lIjoiQWx2aXMiLCJsYXN0TmFtZSI6IkVjaGV2ZXJyaWEiLCJlbWFpbCI6ImFsdmlzLmNtQGdtYWlsLmNvbSIsInBob25lIjoiMTIzNDU2Nzg1MCIsImlhdCI6MTY3MDAxNDY2MywiZXhwIjoxNjcwMTAxMDYzfQ.0_HIuVKJ71wsroeaPuxFXprL6if2Py5Gl_wIGRacu9WyFcs33vwKSJcL7semFZn_Wp5ds5HVDbghbKzFVmcfqg
  *   securitySchemes:
  *      bearerAuth:
  *        type: http

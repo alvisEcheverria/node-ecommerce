@@ -80,9 +80,25 @@ const delProductInCart = async (req, res, next) =>{
     }
 }
 
+const emptyCart = async (req, res, next) =>{
+    try {
+        const bearerToken = req.headers.authorization;
+        const result = await CartsServices.deleteProductsInCart(userToken(bearerToken).id);
+        res.json(result);
+
+    } catch (error) {
+        next({
+            status: 400,
+            errorContent: error,
+            message: 'No se pudo vaciar el carrito'
+        });
+    }
+}
+
 module.exports = {
     addProductToCart,
     getCart,
     updateCart,
-    delProductInCart
+    delProductInCart,
+    emptyCart
 }

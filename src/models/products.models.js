@@ -7,56 +7,63 @@ const Categories = require('./categories.models');
  * @openapi
  * components:
  *   schemas:
- *     products:
+ *     product:
  *       type: object
  *       properties:
  *         title:
  *           type: string
- *           example: MacBook Air 13.3\" Laptop - Apple M1 chip 
+ *           example: "string"
  *         description:
  *           type: string
- *           example: Echeverria
- *         email:
- *           type: string
- *           example: alvis@gmail.com
- *         phone: 
- *           type: string
- *           example: 1234567890
- *     register:
+ *           example: "string"
+ *         price:
+ *           type: integer
+ *           example: "integer"
+ *         productImgs: 
+ *           type: array
+ *           example: ["url"]
+ *         quantity: 
+ *           type: integer
+ *           example: "integer"
+ *         categoryId: 
+ *           type: integer
+ *           example: "integer"
+ *     create product:
  *       type: object
  *       properties:
- *         firstName:
+ *         title:
  *           type: string
- *           example: Alvis
- *         lastName:
+ *           example: Mouse
+ *         description:
  *           type: string
- *           example: Echeverria
- *         email:
- *           type: string
- *           example: alvis@gmail.com
- *         phone:
- *           type: string
- *           example: 1234567890
- *         password:
- *           type: string
- *           example: 1234
- *     updateUser:
+ *           example: Mouse Gamer
+ *         price:
+ *           type: integer
+ *           example: 30.55
+ *         productImgs: 
+ *           type: array
+ *           example: ["http://products/mousefront.img", "http://products/mouseback.img", "http://products/mousewhite.img"]
+ *         quantity: 
+ *           type: integer
+ *           example: 20
+ *         categoryId: 
+ *           type: integer
+ *           example: 1
+ *     update product:
  *       type: object
  *       properties:
- *         password:
+ *         title:
  *           type: string
- *           example: 1234
- *     token:
- *       type: object
- *       properties:
- *         token:
+ *           example: Nevera
+ *         description:
  *           type: string
- *           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiQWx2aXMiLCJsYXN0TmFtZSI6IkVjaGV2ZXJyaWEiLCJlbWFpbCI6ImFsdmlzLmNtQGdtYWlsLmNvbSIsInBob25lIjoiMTIzNDU2NzgzMCIsImlhdCI6MTY2OTk5MzU3NSwiZXhwIjoxNjcwMDc5OTc1fQ.Xy7pTLR_B34908YSO4p6xZ-rdPZLJNkLgz4925aOD4Le-G5O28efp1vJSLLpMUJRkM2xFLuo2VwxrfSwAj7JPg
- *   securitySchemes:
- *      bearerAuth:
- *        type: http
- *        scheme: bearer
- *        bearerFormat: JWT
+ *           example: Enfria mucho
+ *         price:
+ *           type: integer
+ *           example: 1300.99
+ *         quantity:
+ *           type: integer
+ *           example: 5
  */
 
 const Products = db.define('products', {

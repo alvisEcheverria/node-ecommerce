@@ -11,7 +11,7 @@ class CartsServices {
             const searchCartId = await Carts.findOne({where: { userId}})
 
             const { id } = searchCartId ;
-            const productInCart = await ProductsInCarts.findOne({where: {productId}});
+            const productInCart = await ProductsInCarts.findOne({where: {productId: [productId], cartId: [id]}});
             if(!productInCart) await ProductsInCarts.create({cartId: id, productId, quantity, price: priceProduct.price});
             
             const allProductWithPrice = await Carts.findOne({
@@ -70,12 +70,12 @@ class CartsServices {
 
     static async update(userId, newData){
         try {
-            const { id, newQuantity } = newData;
+            const { productId, newQuantity } = newData;
             const cartId = await Carts.findOne({
                 where: { userId }
             });
             const result = await ProductsInCarts.update({quantity: newQuantity}, {
-                where: { productId: [id], cartId: [cartId.id]}
+                where: { productId: [productId], cartId: [cartId.id]}
             });
 
             const allProductWithPrice = await Carts.findOne({
@@ -143,6 +143,43 @@ class CartsServices {
             throw error;
         }
     }
-}
+
+    static async deleteProductsInCart(userId){
+        try {
+            const findCart = await Carts.findOne({
+                where: { userId }
+            }); 
+            const result = await ProductsInCarts.destroy({
+                where: { cartId: findCart.id }
+            });
+
+            const allProductWithPrice = await Carts.findOne({
+                where: { userId },
+                include: {
+                            model: ProductsInCarts,
+                            as: 'productsInCart',
+                            include: {
+                                model: Products,
+                                as: 'products'
+                            }
+                        }
+            });
+
+            let totalPrice = 0;
+
+            allProductWithPrice.productsInCart.forEach(product =>{
+                totalPrice += product.price * product.quantity
+            });
+
+            await Carts.update({totalPrice}, {
+                where: { id: findCart.id }
+            });
+
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
+};
 
 module.exports = CartsServices;

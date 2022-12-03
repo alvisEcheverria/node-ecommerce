@@ -32,20 +32,11 @@ const router = Router();
  *                   type: array
  *                   items:
  *                     $ref: "#/components/schemas/user"
- * /api/v1/users/{userId}:
  *   get:
  *     security:
  *         - bearerAuth: []
- *     summary: Get user by id
+ *     summary: Get user information
  *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *           minimum: 1
- *         description: user Id
  *     responses:
  *       200:
  *         description: OK
@@ -65,15 +56,8 @@ const router = Router();
  *         - bearerAuth: []
  *     summary: update User
  *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: user Id
  *     requestBody:
- *       description: Just you can update the password
+ *       description: only password can be updated
  *       required: true
  *       content:
  *         application/json:

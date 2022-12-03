@@ -1,6 +1,18 @@
 const db = require('../utils/database');
 const { DataTypes } = require('sequelize');
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Register category:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           example: "string"
+ */
+
 const Categories = db.define("categories", {
     id: {
       primaryKey: true,

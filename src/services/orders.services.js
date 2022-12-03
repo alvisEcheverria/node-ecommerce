@@ -5,7 +5,7 @@ class OrdersServices {
         try {
             const clientCart = await Carts.findOne({ where: { userId}});
 
-            await Orders.create({cartId: clientCart.id, totalPrice: clientCart.totalPrice, userId, status: 'purchased'});
+            if(clientCart.totalPrice > 0) await Orders.create({cartId: clientCart.id, totalPrice: clientCart.totalPrice, userId, status: 'purchased'});
 
             const findOrder = await Orders.findOne({
                 where: { cartId: clientCart.id}
