@@ -45,12 +45,6 @@ const bcrypt = require('bcrypt');
  *         password:
  *           type: string
  *           example: 1234
- *     token:
- *       type: object
- *       properties:
- *         token:
- *           type: string
- *           example: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZmlyc3ROYW1lIjoiQWx2aXMiLCJsYXN0TmFtZSI6IkVjaGV2ZXJyaWEiLCJlbWFpbCI6ImFsdmlzLmNtQGdtYWlsLmNvbSIsInBob25lIjoiMTIzNDU2Nzg1MCIsImlhdCI6MTY3MDAxNDY2MywiZXhwIjoxNjcwMTAxMDYzfQ.0_HIuVKJ71wsroeaPuxFXprL6if2Py5Gl_wIGRacu9WyFcs33vwKSJcL7semFZn_Wp5ds5HVDbghbKzFVmcfqg
  *   securitySchemes:
  *      bearerAuth:
  *        type: http
