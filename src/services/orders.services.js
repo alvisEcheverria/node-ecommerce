@@ -23,18 +23,20 @@ class OrdersServices {
                     productId: product.productId, 
                     quantity: product.quantity,
                     price: product.price,
+                    subTotal: product.subTotal,
                     status: 'purchased'
             }));
-
+            
             await ProductsInCarts.destroy({
                 where: { cartId: clientCart.id }
-            }); 
+            });
 
-            await Carts.destroy({
+             await Carts.destroy({
                 where: { userId }
             }); 
-          
-            return { message: 'Compra exitosa'};
+            
+            if(clientCart.totalPrice > 0) return { message: 'Compra exitosa'};
+            else return { message: 'No hay productos en el carrito'}
 
         } catch (error) {
             throw error;

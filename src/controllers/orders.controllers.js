@@ -7,7 +7,9 @@ const genOrder = async (req, res, next) =>{
     try {
         const bearerToken = req.headers.authorization;
         const result = await OrdersServices.generateOrder(userToken(bearerToken).id);
-        res.status(201).json(result);
+
+        if(result.message === 'Compra exitosa') res.status(201).json(result);
+        else res.status(400).json(result);
 
         transporter.sendMail({
             from: '<alvis.cm@gmail.com>',

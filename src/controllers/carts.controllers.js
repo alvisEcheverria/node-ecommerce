@@ -6,14 +6,16 @@ const addProductToCart = async (req, res, next)=>{
     try {
         const addProduct = req.body;
         const bearerToken = req.headers.authorization;
-        await CartsServices.create(({...addProduct, userId: userToken(bearerToken).id}));
-        res.status(201).json({ message: 'Se agrego el producto al carrito'});
+        const result = await CartsServices.create(({...addProduct, userId: userToken(bearerToken).id}));
+       
+        if(result.message === 'Se agrego el producto al carrito') res.status(201).json(result);
+        else res.status(400).json(result);
 
     } catch (error) {
         next({
             status: 400,
             errorContent: error,
-            message: 'Faltan datos'
+            message: 'El producto no existe o faltan datos'
         });
     }
 };
@@ -83,7 +85,7 @@ const delProductInCart = async (req, res, next) =>{
 const emptyCart = async (req, res, next) =>{
     try {
         const bearerToken = req.headers.authorization;
-        const result = await CartsServices.deleteProductsInCart(userToken(bearerToken).id);
+        const result = await CartsServices.delAllProductsInCart(userToken(bearerToken).id);
         res.json(result);
 
     } catch (error) {

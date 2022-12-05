@@ -24,7 +24,7 @@ const Orders = db.define('orders', {
         allowNull: false,
     },
     totalPrice: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.FLOAT,
         allowNull: false,
         field: 'total_price'
     },

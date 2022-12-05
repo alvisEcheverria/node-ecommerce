@@ -36,6 +36,11 @@ const ProductsInCarts = db.define('products_in_carts', {
         type: DataTypes.DOUBLE,
         allowNull: false
     },
+    subTotal: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        field: 'sub_total'
+    },
     status: {
         type: DataTypes.ENUM('active', 'inactive', 'purchased'),
         defaultValue: 'active'

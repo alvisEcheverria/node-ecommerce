@@ -43,7 +43,7 @@ const Carts = db.define('carts', {
         allowNull: false,
     },
     totalPrice: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.FLOAT,
         field: 'total_price'
     },
     status: {

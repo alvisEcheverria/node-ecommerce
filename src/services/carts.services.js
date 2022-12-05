@@ -1,10 +1,12 @@
 const { Carts, ProductsInCarts, Products, Categories } = require("../models");
+const subTotal = require("../utils/subTotal");
+const totalPrice = require('../utils/totalPrice');
 
 class CartsServices {
     static async create (addProduct){
         try {
             const { productId, quantity, userId } = addProduct;
-            const priceProduct = await Products.findByPk(productId);
+            const findProduct = await Products.findByPk(productId);
 
             const clientCart = await Carts.findOne({ where: { userId}});
             if(!clientCart) await Carts.create({userId});
@@ -12,29 +14,14 @@ class CartsServices {
 
             const { id } = searchCartId ;
             const productInCart = await ProductsInCarts.findOne({where: {productId: [productId], cartId: [id]}});
-            if(!productInCart) await ProductsInCarts.create({cartId: id, productId, quantity, price: priceProduct.price});
-            
-            const allProductWithPrice = await Carts.findOne({
-                where: { userId },
-                include: {
-                            model: ProductsInCarts,
-                            as: 'productsInCart',
-                            include: {
-                                model: Products,
-                                as: 'products'
-                            }
-                        }
-            });
+            if(!productInCart) await ProductsInCarts.create({cartId: id, productId, quantity, price: findProduct.price, subTotal: 0});
+           
+            await subTotal(productId, id);
 
-            let totalPrice = 0;
+            await totalPrice(Carts, userId, id);
 
-            allProductWithPrice.productsInCart.forEach(product =>{
-                totalPrice += product.price * product.quantity
-            })
-
-            await Carts.update({totalPrice}, {
-                where: { id }
-            });
+            if(!productInCart) return { message: 'Se agrego el producto al carrito'};
+            else return { message: 'El producto ya fue agregado al carrito'}
 
         } catch (error) {
             throw error;
@@ -78,27 +65,9 @@ class CartsServices {
                 where: { productId: [productId], cartId: [cartId.id]}
             });
 
-            const allProductWithPrice = await Carts.findOne({
-                where: { userId },
-                include: {
-                            model: ProductsInCarts,
-                            as: 'productsInCart',
-                            include: {
-                                model: Products,
-                                as: 'products'
-                            }
-                        }
-            });
+            await subTotal(productId, cartId.id);
 
-            let totalPrice = 0;
-
-            allProductWithPrice.productsInCart.forEach(product =>{
-                totalPrice += product.price * product.quantity
-            });
-
-            await Carts.update({totalPrice}, {
-                where: { id: cartId.id }
-            });
+            await totalPrice(Carts, userId, cartId.id);
 
             return result;
         } catch (error) {
@@ -115,27 +84,7 @@ class CartsServices {
                 where: { cartId: [cartId.id], productId: [productId] }
             });
 
-            const allProductWithPrice = await Carts.findOne({
-                where: { userId },
-                include: {
-                            model: ProductsInCarts,
-                            as: 'productsInCart',
-                            include: {
-                                model: Products,
-                                as: 'products'
-                            }
-                        }
-            });
-
-            let totalPrice = 0;
-
-            allProductWithPrice.productsInCart.forEach(product =>{
-                totalPrice += product.price * product.quantity
-            });
-
-            await Carts.update({totalPrice}, {
-                where: { id: cartId.id }
-            });
+            await totalPrice(Carts, userId, cartId.id);
 
             return result;
 
@@ -144,7 +93,7 @@ class CartsServices {
         }
     }
 
-    static async deleteProductsInCart(userId){
+    static async delAllProductsInCart(userId){
         try {
             const findCart = await Carts.findOne({
                 where: { userId }
@@ -152,28 +101,8 @@ class CartsServices {
             const result = await ProductsInCarts.destroy({
                 where: { cartId: findCart.id }
             });
-
-            const allProductWithPrice = await Carts.findOne({
-                where: { userId },
-                include: {
-                            model: ProductsInCarts,
-                            as: 'productsInCart',
-                            include: {
-                                model: Products,
-                                as: 'products'
-                            }
-                        }
-            });
-
-            let totalPrice = 0;
-
-            allProductWithPrice.productsInCart.forEach(product =>{
-                totalPrice += product.price * product.quantity
-            });
-
-            await Carts.update({totalPrice}, {
-                where: { id: findCart.id }
-            });
+            
+            await totalPrice(Carts, userId, findCart.id);
 
             return result;
         } catch (error) {

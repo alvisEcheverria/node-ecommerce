@@ -33,8 +33,13 @@ const ProductsInOrders = db.define('products_in_orders', {
         allowNull: false
     },
     price: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.FLOAT,
         allowNull: false
+    },
+    subTotal: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        field: 'sub_total'
     },
     status: {
         type: DataTypes.ENUM('active', 'inactive', 'purchased'),
