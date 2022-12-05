@@ -53,7 +53,7 @@ class OrdersServices {
                 include: {
                     model: ProductsInOrders,
                     as: 'productsInOrder',
-                    attributes: ['id', 'orderId', 'productId', 'quantity', 'price'],
+                    attributes: ['id', 'orderId', 'productId', 'quantity', 'price', 'subTotal'],
                     include: {
                         model: Products,
                         as: 'products',

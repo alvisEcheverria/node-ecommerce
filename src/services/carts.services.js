@@ -37,7 +37,7 @@ class CartsServices {
             include: {
                 model: ProductsInCarts,
                 as: 'productsInCart',
-                attributes: ['id', 'cartId', 'productId', 'quantity', 'status'],
+                attributes: ['id', 'cartId', 'productId', 'quantity', 'subTotal', 'status'],
                 include: {
                     model: Products,
                     as: 'products',
