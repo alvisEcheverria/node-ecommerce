@@ -37,8 +37,40 @@ const router = Router();
  *   get:
  *     security:
  *         - bearerAuth: []
- *     summary: Get all products
+ *     summary: Get all products default
  *     tags: [Products]
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   type: array
+ *                   items: {}
+ * /api/v1/products?offset={offset}&limit={limit}:
+ *   get:
+ *     security:
+ *         - bearerAuth: []
+ *     summary: Get all products with queries
+ *     tags: [Products]
+ *     parameters:
+ *       - in: query
+ *         name: offset
+ *         required: true
+ *         description: offset = page
+ *       - in: query
+ *         name: limit
+ *         required: true
+ *         description: limit = products per page
+ *         schema:
+ *           type: string
+ *           minimum: 1
  *     responses:
  *       200:
  *         description: OK
@@ -147,7 +179,7 @@ const router = Router();
 
 router.post('/products', authenticate, createProduct);
 
-router.get('/products', authenticate, getAllProducts);
+router.get('/products', getAllProducts);
 
 router.get('/products/:productId', authenticate, getProductById);
 

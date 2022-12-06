@@ -1,5 +1,6 @@
 const { ProductsServices } = require('../services');
 const userToken = require('../utils/dataToken');
+require('dotenv').config();
 
 const createProduct = async (req, res, next)=>{
     try {
@@ -18,12 +19,29 @@ const createProduct = async (req, res, next)=>{
 
 const getAllProducts = async (req, res, next)=>{
     try {
-        const result = await ProductsServices.getAll()
+
+        const offset = Number(req.query.offset ?? 0);
+        const limit = Number(req.query.limit ?? 10);
+
+        const result = await ProductsServices.getAll(offset, limit);
+
+        const { count, rows } = result;
+        
         res.json({
             status: 'success',
+            count,
+            next: `${process.env.HOST}/api/v1${req.path}?offset=${
+                offset + limit
+              }&limit=${limit}`,
+            previous: 
+            offset >= limit? `${process.env.HOST}/api/v1${req.path}?offset=${
+                offset - limit
+            }&limit=${limit}`
+            : 
+            null,
             data: {
                 products: 
-                result
+                rows
             }
         });
     } catch (error) {

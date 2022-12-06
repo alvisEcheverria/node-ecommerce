@@ -10,9 +10,17 @@ class ProductsServices {
         }
     }
 
-    static async getAll (){
+    static async getAll (offset, limit){
         try {
-            const result = await Products.findAll({
+            
+            await Products.update({status: 'inactive'},{
+                where: { quantity: 0 }
+            });
+
+            const result = await Products.findAndCountAll({
+                offset,
+                limit,
+                where: { status: 'active' },
                 attributes: ['id', 'title', 'description', 'price', 'productImgs', 'quantity', 'status', 'categoryId', 'userId'],
                 include: [
                 {
@@ -27,8 +35,7 @@ class ProductsServices {
                 ]
             });
 
-            const availableProducts = result.filter(products => products.quantity > 0);
-            return availableProducts;
+            return result;
 
         } catch (error) {
             throw error;
