@@ -61,7 +61,7 @@ const updateCart = async (req, res, next) =>{
         next({
             status: 400,
             errorContent: error,
-            message: 'El carrito no se pudo actualizar'
+            message: 'El producto no existe o faltan datos'
         });
     }
 }

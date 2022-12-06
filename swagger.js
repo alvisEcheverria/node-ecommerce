@@ -7,7 +7,8 @@ const options = {
         info: {
             title: 'Ecommerce',
             version: '1.0.0',
-            description: 'Tienda ecommerce'
+            description: 
+            'Ecommerce para ventas de todo tipo, el usuario puede registrarse, actualizar su contraseña, crear nuevas categorias, crear nuevos productos, actualizar productos, agregar productos al carrito, vaciarlo, eliminar productos en especifico, actualizar las cantidades de los productos en el carrito, comprar y ver las ordenes de las compras ejecutadas con su precio por producto, subtotal y total. Se enviará un correo cuando el usuario sea creado y cuando realice una compra'
         }
     },
     apis: [

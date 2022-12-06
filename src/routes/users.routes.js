@@ -11,12 +11,12 @@ const router = Router();
  *     summary: Register a new user into the app
  *     tags: [Users]
  *     requestBody:
- *       description: To register a new user you need a firstname, lastname, email, phone and password
+ *       description: To register a new user you need a firstname, lastname, email, phone(minimum 10 digits) and password(minimum 8 digits)
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/register"
+ *             $ref: "#/components/schemas/register user"
  *     responses:
  *       201:
  *         description: created
@@ -54,15 +54,15 @@ const router = Router();
  *   put:
  *     security:
  *         - bearerAuth: []
- *     summary: update User
+ *     summary: Update User
  *     tags: [Users]
  *     requestBody:
- *       description: only password can be updated
+ *       description: Only password(minimum 8 digits) can be updated and it must be different from the previous one
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/updateUser"
+ *             $ref: "#/components/schemas/update user"
  *     responses:
  *       200:
  *         description: updated

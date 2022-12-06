@@ -16,12 +16,8 @@ const Orders = db.define('orders', {
     }, 
     userId: {
         type: DataTypes.INTEGER,
-        references: {
-            model: Users,
-            key: "id",
-        },
-        field: "user_id",
         allowNull: false,
+        field: "user_id",
     },
     totalPrice: {
         type: DataTypes.FLOAT,

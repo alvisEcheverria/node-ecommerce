@@ -12,21 +12,13 @@ const ProductsInCarts = db.define('products_in_carts', {
     },
     cartId: {
         type: DataTypes.INTEGER,
-        references: {
-            model: Carts,
-            key: "id",
-        },
-        field: "cart_id",
         allowNull: false,
+        field: "cart_id",
     },
     productId: {
         type: DataTypes.INTEGER,
-        references: {
-            model: Products,
-            key: "id",
-        },
-        field: "product_id",
         allowNull: false,
+        field: "product_id",
     },
     quantity: {
         type: DataTypes.SMALLINT,

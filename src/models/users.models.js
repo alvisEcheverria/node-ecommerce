@@ -17,11 +17,11 @@ const bcrypt = require('bcrypt');
  *           example: Echeverria
  *         email:
  *           type: string
- *           example: alvis@gmail.com
+ *           example: alvis.cm@gmail.com
  *         phone: 
  *           type: string
  *           example: 1234567890
- *     register:
+ *     register user:
  *       type: object
  *       properties:
  *         firstName:
@@ -32,19 +32,19 @@ const bcrypt = require('bcrypt');
  *           example: Echeverria
  *         email:
  *           type: string
- *           example: alvis@gmail.com
+ *           example: alvis.cm@gmail.com
  *         phone:
  *           type: string
  *           example: 1234567890
  *         password:
  *           type: string
- *           example: 1234
- *     updateUser:
+ *           example: 12345678
+ *     update user:
  *       type: object
  *       properties:
  *         password:
  *           type: string
- *           example: 1234
+ *           example: 1234567a
  *   securitySchemes:
  *      bearerAuth:
  *        type: http
@@ -91,7 +91,7 @@ const Users = db.define('users', {
     hooks: {
         beforeCreate: (user, option)=> {
             const { password } = user;
-            const hash = bcrypt.hashSync(password, 8);
+            const hash = bcrypt.hashSync(password, 10);
             user.password = hash;
         }
     }

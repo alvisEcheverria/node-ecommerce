@@ -32,7 +32,7 @@ class CartsServices {
         const result = await Carts.findOne({
             where: { userId },
             attributes: {
-                exclude: ['id', 'user_id']
+                exclude: ['user_id']
             },
             include: {
                 model: ProductsInCarts,

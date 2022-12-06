@@ -54,13 +54,13 @@ const Categories = require('./categories.models');
  *       properties:
  *         title:
  *           type: string
- *           example: Nevera
+ *           example: Mouse Black
  *         description:
  *           type: string
- *           example: Enfria mucho
+ *           example: Mouse Gamer RGB
  *         price:
  *           type: integer
- *           example: 1300.99
+ *           example: 35.99
  *         quantity:
  *           type: integer
  *           example: 5
@@ -100,21 +100,13 @@ const Products = db.define('products', {
     },
     categoryId: {
         type: DataTypes.INTEGER,
-        references: {
-            model: Categories,
-            key: "id",
-        },
-        field: "category_id",
         allowNull: false,
+        field: "category_id",
     },
     userId: {
         type: DataTypes.INTEGER,
-        references: {
-            model: Users,
-            key: "id",
-        },
-        field: "user_id",
         allowNull: false,
+        field: "user_id",
     }
 });
 

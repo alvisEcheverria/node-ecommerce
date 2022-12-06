@@ -18,7 +18,7 @@ const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/Register category"
+ *             $ref: "#/components/schemas/create category"
  *     responses:
  *       201:
  *         description: category created successfully
@@ -33,7 +33,7 @@ const router = Router();
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: "#/components/schemas/Register category"
+ *                     $ref: "#/components/schemas/create category"
  *   get:
  *     security:
  *         - bearerAuth: []

@@ -22,7 +22,7 @@ const router = Router();
  *                 example: alvis.cm@gmail.com
  *               password:
  *                 type: string
- *                 example: 123
+ *                 example: 12345678
  *     responses:
  *       200:
  *         description: success login 

@@ -5,12 +5,12 @@ const { DataTypes } = require('sequelize');
  * @openapi
  * components:
  *   schemas:
- *     Register category:
+ *     create category:
  *       type: object
  *       properties:
  *         name:
  *           type: string
- *           example: "string"
+ *           example: "Computers"
  */
 
 const Categories = db.define("categories", {
